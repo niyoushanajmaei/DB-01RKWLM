@@ -1,0 +1,27 @@
+<HTML>
+    <Head><Tile>Home</Tile></Head>
+    <body>
+        <form name="home" action="home.php" method="GET">
+            <table>
+                <tr>
+                    <td>What do you want to do?</td>
+                    <td>
+                        <select name="action">
+                            <option value="insert_user">Insert a new User</option>
+                            <option value="insert_rating">Insert a new Rating</option>
+                            <option value="query">Query the Database</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="reset" name="cancel" value="cancel">
+                    </td>
+                    <td>
+                        <input type="submit" name="submit" value="submit"> 
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</HTML>
