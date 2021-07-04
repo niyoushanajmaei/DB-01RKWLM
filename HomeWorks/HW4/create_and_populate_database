@@ -1,0 +1,102 @@
+SET storage_engine=InnoDB;
+DROP DATABASE IF EXISTS Multimedia;
+CREATE DATABASE Multimedia;
+USE Multimedia; 
+SET FOREIGN_KEY_CHECKS=1;
+
+DROP TABLE IF EXISTS USERS;
+DROP TABLE IF EXISTS CONTENT;
+DROP TABLE IF EXISTS RATING;
+
+CREATE TABLE USERS(
+    SSN CHAR(20) NOT NULL  PRIMARY KEY,
+    Name CHAR(20) NOT NULL,
+    Surname CHAR(20) NOT NULL,
+    YearOfBirth INT NOT NULL
+);
+
+CREATE TABLE CONTENT(
+    CodC INTEGER NOT NULL PRIMARY KEY
+        CHECK (CodC > 0),
+    Category CHAR(20) NOT NULL,
+    Duration INTEGER NOT NULL
+        CHECK (Duration > 0),
+    Title CHAR(20) NOT NULL,
+    Description CHAR(100)
+);
+
+CREATE TABLE RATING(
+    SSN CHAR(20) NOT NULL,
+    CodC INTEGER NOT NULL,
+    Date CHAR(10) NOT NULL,
+    Evalutaion INTEGER NOT NULL
+        CHECK (Evalutaion >= 1 && Evalutaion <= 10),
+    PRIMARY KEY (SSN,CodC,Date),
+    FOREIGN KEY (SSN) REFERENCES USERS(SSN)
+    ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (CodC) REFERENCES CONTENT(CodC)
+    ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+INSERT INTO USERS(SSN, Name, Surname, YearOfBirth)
+VALUES ("213-06-3455","Haylee", "Turcotte", 1992);
+INSERT INTO USERS(SSN, Name, Surname, YearOfBirth)
+VALUES ("031-88-9588","Camille", "Rogahn", 1982);
+INSERT INTO USERS(SSN, Name, Surname, YearOfBirth)
+VALUES ("217-24-0515","Nina", "Stanton", 1972);
+INSERT INTO USERS(SSN, Name, Surname, YearOfBirth)
+VALUES ("536-84-0476","Liza", "Hand", 1986);
+INSERT INTO USERS(SSN, Name, Surname, YearOfBirth)
+VALUES ("512-08-8161","Demetrius", "Nienow", 1987);
+INSERT INTO USERS(SSN, Name, Surname, YearOfBirth)
+VALUES ("019-68-3861","Damion", "Pfeffer", 1975);
+INSERT INTO USERS(SSN, Name, Surname, YearOfBirth)
+VALUES ("646-40-5692","Lulu", "Bosco", 1994);
+INSERT INTO USERS(SSN, Name, Surname, YearOfBirth)
+VALUES ("759-12-3450","Miracle", "Stark", 1970);
+INSERT INTO USERS(SSN, Name, Surname, YearOfBirth)
+VALUES ("221-11-4805","Wilton", "Smith", 1974);
+INSERT INTO USERS(SSN, Name, Surname, YearOfBirth)
+VALUES ("501-05-1953","Casper", "Carmelo", 1976);
+
+INSERT INTO CONTENT (CodC,Category,Duration,Title,Description)
+VALUES(1,"SciFi",125,"Star Treck","Wrath of Khan");
+INSERT INTO CONTENT (CodC,Category,Duration,Title,Description)
+VALUES(2,"Fantasy",198,"The Hobbit","An Unexpected Journey");
+INSERT INTO CONTENT (CodC,Category,Duration,Title,Description)
+VALUES(3,"Romance",93,"The Choice","A Romance Movie");
+INSERT INTO CONTENT (CodC,Category,Duration,Title,Description)
+VALUES(4,"Drama",78,"Driving Miss Daisy","Cool Movie");
+INSERT INTO CONTENT (CodC,Category,Duration,Title,Description)
+VALUES(5,"Action",120,"Twister","I Havne't Watched It");
+INSERT INTO CONTENT (CodC,Category,Duration,Title,Description)
+VALUES(6,"Animation",90,"I Lost My Body","Sounds Creepy");
+INSERT INTO CONTENT (CodC,Category,Duration,Title,Description)
+VALUES(7,"Fantasy",100,"Big","The Piano Scene");
+INSERT INTO CONTENT (CodC,Category,Duration,Title,Description)
+VALUES(8,"SciFi",170,"Star Wars","The Empire Strikes Back");
+INSERT INTO CONTENT (CodC,Category,Duration,Title,Description)
+VALUES(9,"Drama",91,"American Beauty","Kind of A Weird Movie");
+INSERT INTO CONTENT (CodC,Category,Duration,Title,Description)
+VALUES(10,"Animation",70,"The Willoughbys","A Surprisingly Good Movie");
+
+INSERT INTO RATING (SSN, CodC, Date, Evalutaion)
+VALUES ("213-06-3455",4,"04/06/2004",8);
+INSERT INTO RATING (SSN, CodC, Date, Evalutaion)
+VALUES ("213-06-3455",9,"04/07/2005",6);
+INSERT INTO RATING (SSN, CodC, Date, Evalutaion)
+VALUES ("213-06-3455",2,"10/11/2015",2);
+INSERT INTO RATING (SSN, CodC, Date, Evalutaion)
+VALUES ("501-05-1953",4,"04/06/2004",1);
+INSERT INTO RATING (SSN, CodC, Date, Evalutaion)
+VALUES ("501-05-1953",8,"04/06/1999",10);
+INSERT INTO RATING (SSN, CodC, Date, Evalutaion)
+VALUES ("501-05-1953",1,"04/02/2004",1);
+INSERT INTO RATING (SSN, CodC, Date, Evalutaion)
+VALUES ("221-11-4805",2,"05/07/2018",5);
+INSERT INTO RATING (SSN, CodC, Date, Evalutaion)
+VALUES ("221-11-4805",2,"05/07/2019",6);
+INSERT INTO RATING (SSN, CodC, Date, Evalutaion)
+VALUES ("536-84-0476",2,"05/07/2019",1);
+INSERT INTO RATING (SSN, CodC, Date, Evalutaion)
+VALUES ("536-84-0476",5,"05/07/2019",9);
